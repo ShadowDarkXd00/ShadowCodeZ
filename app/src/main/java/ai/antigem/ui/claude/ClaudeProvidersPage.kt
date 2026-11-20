@@ -160,7 +160,8 @@ fun ProvidersPage(deps: ClaudeSettingsDeps) {
     Text("Other Anthropic-compatible APIs", fontWeight = FontWeight.Bold, fontSize = 14.sp)
     Text(
         "OpenRouter, Kimi, DeepSeek, Z.ai… Their models are listed in the chat's model picker under Claude's own. " +
-            "A chat on one of them uses its key, headers and limits; your Claude login and other chats stay as they are.",
+            "Save multiple provider profiles if needed; each chat uses the selected profile's key, headers and limits. " +
+            "Your Claude login and other chats stay as they are.",
         fontSize = 11.5.sp, color = muted
     )
     // Claude Code speaks only Anthropic's API: other providers work better in OpenCode
@@ -771,7 +772,7 @@ private fun ProviderEditor(
                     EditorSection("Advanced", "Extra request headers and environment variables for this provider's chats.") {
                         OutlinedTextField(
                             headers, { headers = it }, label = { Text("Headers (one per line)") }, minLines = 2, maxLines = 6,
-                            placeholder = { Text("X-Title: AntiGem\nHTTP-Referer: https://example.com") },
+                            placeholder = { Text("X-Title: ShadowCodez\nHTTP-Referer: https://example.com") },
                             textStyle = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace), modifier = Modifier.fillMaxWidth()
                         )
                         OutlinedTextField(

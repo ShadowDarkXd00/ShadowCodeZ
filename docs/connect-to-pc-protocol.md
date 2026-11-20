@@ -1,6 +1,6 @@
 # Connect to PC: pairing protocol
 
-This describes how the AntiGem app (phone) pairs with AntiGem in VS Code (PC). After pairing, the phone uses the
+This describes how the ShadowCodez app (phone) pairs with ShadowCodez in VS Code (PC). After pairing, the phone uses the
 agents of the bridge VS Code runs on the PC, through an SSH tunnel.
 
 - Phone side, already built: `app/.../data/pc/PcConnect.kt` and `PcPairingCrypto.kt`.
@@ -9,7 +9,7 @@ agents of the bridge VS Code runs on the PC, through an SSH tunnel.
 
 ## Overview
 
-1. On the PC, the user opens **Connect phone** in AntiGem. While that screen is open the extension:
+1. On the PC, the user opens **Connect phone** in ShadowCodez. While that screen is open the extension:
    - shows a random **6-digit code**;
    - listens on a **pairing port** (default **1250**, on the LAN);
    - announces itself on mDNS.

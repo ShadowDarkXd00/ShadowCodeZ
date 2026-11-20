@@ -1,9 +1,9 @@
-# MCP tools: AntiGem.mcp
+# MCP tools: ShadowCodez.mcp
 
-AntiGem has built-in MCP tool servers (notes, themes, the browser, the terminal, Android automation, …) that its AI
-agents use. A mini app can call the same tools with `AntiGem.mcp`, for example to read and create notes in AntiGem's
+ShadowCodez has built-in MCP tool servers (notes, themes, the browser, the terminal, Android automation, …) that its AI
+agents use. A mini app can call the same tools with `ShadowCodez.mcp`, for example to read and create notes in ShadowCodez's
 Notes, or to switch the theme. Each server is its own permission, declared in the manifest and granted by the user.
-Calls run inside AntiGem (no network, no local port).
+Calls run inside ShadowCodez (no network, no local port).
 
 This page is about calling tools from a mini app. To let an agent build and test mini apps, see
 [developer MCP](developer-mcp.md).
@@ -23,14 +23,14 @@ Servers a mini app can name:
 
 | Server | Tools for |
 |---|---|
-| `notes_mcp` | AntiGem's Notes and to-do lists |
-| `theme_mcp` | AntiGem's color themes |
-| `browser_mcp` | Controlling Chrome through the AntiGem browser extension |
+| `notes_mcp` | ShadowCodez's Notes and to-do lists |
+| `theme_mcp` | ShadowCodez's color themes |
+| `browser_mcp` | Controlling Chrome through the ShadowCodez browser extension |
 | `terminal_mcp` | The terminal |
 | `android_automation_mcp` | Controlling the phone's screen and apps |
 | `google_flow_mcp` | Google Flow |
-| `custom_plugin_developer_mcp` | Building AntiGem plugins |
-| `extension_<id>` | The MCP tools of the extension with that id installed in AntiGem's browser |
+| `custom_plugin_developer_mcp` | Building ShadowCodez plugins |
+| `extension_<id>` | The MCP tools of the extension with that id installed in ShadowCodez's browser |
 
 The permission prompt marks servers whose name contains `terminal`, `android` or `browser` as dangerous ("Can control
 parts of your phone"). Ask only for what the app needs.
@@ -39,14 +39,14 @@ parts of your phone"). Ask only for what the app needs.
 
 | Method | Returns | Meaning |
 |---|---|---|
-| `AntiGem.mcp.list(server)` | `Promise<tool[]>` | The server's tools: `[{name, description, inputSchema, …}]` as in MCP `tools/list` |
-| `AntiGem.mcp.call(server, tool, args?)` | `Promise<result>` | Calls one tool with `args` (an object, default `{}`). Resolves with the MCP `tools/call` result, usually `{content: [{type: 'text', text}], isError?}` |
+| `ShadowCodez.mcp.list(server)` | `Promise<tool[]>` | The server's tools: `[{name, description, inputSchema, …}]` as in MCP `tools/list` |
+| `ShadowCodez.mcp.call(server, tool, args?)` | `Promise<result>` | Calls one tool with `args` (an object, default `{}`). Resolves with the MCP `tools/call` result, usually `{content: [{type: 'text', text}], isError?}` |
 
 ```js
-const tools = await AntiGem.mcp.list('notes_mcp');
+const tools = await ShadowCodez.mcp.list('notes_mcp');
 console.log(tools.map((t) => t.name));   // ['notes_list', 'notes_get', 'notes_create', …]
 
-const r = await AntiGem.mcp.call('notes_mcp', 'notes_create', { title: 'Groceries', items: ['Milk', 'Eggs'] });
+const r = await ShadowCodez.mcp.call('notes_mcp', 'notes_create', { title: 'Groceries', items: ['Milk', 'Eggs'] });
 const text = (r.content || []).filter((c) => c.type === 'text').map((c) => c.text).join('\n');
 if (r.isError) throw new Error(text);
 ```
@@ -69,7 +69,7 @@ if (r.isError) throw new Error(text);
 Request the permission first, and handle a denial:
 
 ```js
-if (await AntiGem.permissions.request('mcp:notes_mcp') !== 'granted') {
-  AntiGem.ui.toast('Allow "AntiGem tools: notes_mcp" to sync with Notes');
+if (await ShadowCodez.permissions.request('mcp:notes_mcp') !== 'granted') {
+  ShadowCodez.ui.toast('Allow "ShadowCodez tools: notes_mcp" to sync with Notes');
 }
 ```

@@ -45,11 +45,12 @@ jobs:
         run: |
           chmod +x gradlew scripts/build_all_apks.sh
           ./scripts/build_all_apks.sh
+          cp output/AntiGem-v*-debug.apk output/ShadowCodez-debug.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: ShadowCodez-debug-apk
-          path: output/*-debug.apk
+          path: output/ShadowCodez-debug.apk
           if-no-files-found: error
           retention-days: 14

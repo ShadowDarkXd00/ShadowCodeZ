@@ -10,7 +10,7 @@ body:
         "It doesn't work" or "App not working" without details will be **closed**.
         Tell us **what** you did, **when** it happened, **what** you expected and **what** happened instead.
 
-        - App **crashed** (the "AntiGem stopped" screen)? Use **💥 Crash** instead.
+        - App **crashed** (the "ShadowCodez stopped" screen)? Use **💥 Crash** instead.
         - Problem **installing** the APK or **setting up** the Linux environment? Use **📦 Install / setup problem**.
         - Problem with an **agent, model, sign-in or API key**? Use **🤖 Agent / model problem**.
 
@@ -37,7 +37,7 @@ body:
     id: build
     attributes:
       label: Build
-      description: "Which AntiGem app is installed."
+      description: "Which ShadowCodez app is installed."
       options:
         - ai.antigem (the current app)
         - com.termux (the old build)
@@ -55,7 +55,7 @@ body:
         - On this phone (default)
         - Server mode, SSH tunnel
         - Server mode, domain / open ports
-        - Connected to a PC (AntiGem for VS Code)
+        - Connected to a PC (ShadowCodez for VS Code)
     validations:
       required: true
 

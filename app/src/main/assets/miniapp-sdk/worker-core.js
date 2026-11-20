@@ -1,5 +1,5 @@
 /*
- * AntiGem Mini Apps SDK: worker core. Runs first in every worker / thread of a mini app (the runtime injects it).
+ * ShadowCodez Mini Apps SDK: worker core. Runs first in every worker / thread of a mini app (the runtime injects it).
  * Workers can't reach native code directly, so calls travel over a private MessageChannel to the page that
  * created the worker, which forwards them (core.js attachWorker). Same internal API as the page: __AG.call/send/on.
  * fetch, XHR, WebSocket, EventSource and indexedDB then work exactly as in the page (net.js, idb.js).
@@ -110,7 +110,7 @@
     configurable: false, enumerable: false, writable: false
   });
 
-  // ------------------------------------------------------------------ AntiGem (what makes sense off the UI thread)
+  // ------------------------------------------------------------------ ShadowCodez (what makes sense off the UI thread)
   function payload(data) {
     if (typeof data === 'string') return Promise.resolve({ text: data });
     if (data instanceof Blob) return data.arrayBuffer().then(function (b) { return { b64: b64encode(b) }; });
@@ -143,7 +143,7 @@
     if (Array.isArray(o.messages)) o.messages = o.messages.map(function (m) { return Object.assign({}, m, m.time instanceof Date ? { time: m.time.getTime() } : {}); });
     return o;
   }
-  define(G, 'AntiGem', {
+  define(G, 'ShadowCodez', {
     sdk: BOOT.sdk || 1,
     worker: true,
     app: Object.freeze(Object.assign({}, BOOT.app)),

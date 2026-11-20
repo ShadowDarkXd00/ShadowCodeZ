@@ -504,7 +504,10 @@ class OpenCodeTranscript(var sessionId: String = "") {
 
     private fun setError(msg: Msg, err: JsonObject) {
         msg.errorTitle = errorTitle(err)
-        msg.error = err.str("message") ?: err.toString()
+        val detail = err.str("message") ?: err.toString()
+        msg.error = if (err.str("type")?.contains("rate-limit") == true) {
+            "$detail\n\nChoose another configured model in the chat picker, or add an authorized endpoint under Settings → OpenCode → Custom providers."
+        } else detail
         msg.errorAuth = isAuthError(err)
     }
 

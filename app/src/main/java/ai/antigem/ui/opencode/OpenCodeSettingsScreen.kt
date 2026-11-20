@@ -94,7 +94,7 @@ private fun toast(msg: String, ok: Boolean = true) =
 enum class OpenCodeSettingsPage(val title: String, val subtitle: String) {
     SERVER("OpenCode CLI", "Install, update and restart OpenCode"),
     DEFAULTS("Permissions", "What OpenCode asks before acting, and the agent of new chats"),
-    PROVIDERS("Custom providers", "Sign in or add an API key, or add any OpenAI- or Anthropic-compatible API manually"),
+    PROVIDERS("Custom providers", "OpenCode's provider catalog plus multiple custom API profiles"),
     MCP("MCP servers", "Tools OpenCode can call: presets and your own servers"),
     SKILLS("Skills", "Add skills from GitHub, update or remove them")
 }
@@ -352,8 +352,9 @@ fun OpenCodeSettingsScreen(
         if (page == OpenCodeSettingsPage.PROVIDERS) ClaudeCard {
             Text("Manual", fontWeight = FontWeight.Bold, fontSize = 14.sp)
             Text(
-                "Any OpenAI-compatible API (Ollama, LM Studio, vLLM, LiteLLM, a company gateway…) or an Anthropic-compatible one, " +
-                    "added by its address. It must be reachable from the server.",
+                "Use any OpenAI-compatible API (Ollama, LM Studio, vLLM, LiteLLM, a company gateway…) or Anthropic-compatible API. " +
+                    "You can save multiple profiles, each with its own address and key, then choose its models in the chat picker. " +
+                    "The endpoint must be reachable from the server; provider usage limits still apply.",
                 fontSize = 12.sp, lineHeight = 16.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
             )
             customs.forEach { p ->

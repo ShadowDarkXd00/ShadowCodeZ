@@ -2,21 +2,21 @@
 
 Heavy work (parsing, image processing, search, math) can run on other CPU cores so the page never stutters. Standard
 Web Workers work, and the SDK is loaded inside every worker of the app, so `fetch`, `XMLHttpRequest`, `WebSocket`,
-`EventSource`, `indexedDB` and most of `AntiGem` behave there exactly as in the page, with the same permissions. On top
-of that, `AntiGem.thread` runs a plain function on a pool of worker threads without writing a worker file. Threads
+`EventSource`, `indexedDB` and most of `ShadowCodez` behave there exactly as in the page, with the same permissions. On top
+of that, `ShadowCodez.thread` runs a plain function on a pool of worker threads without writing a worker file. Threads
 share data by copying messages: `SharedArrayBuffer` is not available.
 
-## AntiGem.thread
+## ShadowCodez.thread
 
 ```js
 // one call on another core
-const sum = await AntiGem.thread.run((a, b) => a + b, [2, 40]);   // 42
+const sum = await ShadowCodez.thread.run((a, b) => a + b, [2, 40]);   // 42
 
 // a list spread over all threads; results come back in the same order
-const sizes = await AntiGem.thread.map(urls, async (url) => (await (await fetch(url)).arrayBuffer()).byteLength);
+const sizes = await ShadowCodez.thread.map(urls, async (url) => (await (await fetch(url)).arrayBuffer()).byteLength);
 
 // a pool of your own (for example 2 threads for background work), closed when done
-const pool = AntiGem.thread.pool(2);
+const pool = ShadowCodez.thread.pool(2);
 const parsed = await pool.run((text) => JSON.parse(text).items.length, [bigJsonText]);
 pool.close();
 ```
@@ -35,14 +35,14 @@ How it works:
 - **The function is copied to the thread as source code.** It can't use variables from outside its own body: pass
   everything in `args`. Use an arrow function or a `function` expression; a method written in shorthand
   (`{ f() {} }`) or a bound function can't be rebuilt from its source. You may also pass the source as a string.
-- The function may be `async`, and may use `fetch`, `indexedDB`, `AntiGem.fs`, `AntiGem.mcp` and the rest of the
+- The function may be `async`, and may use `fetch`, `indexedDB`, `ShadowCodez.fs`, `ShadowCodez.mcp` and the rest of the
   [worker SDK](#what-workers-have).
 - Arguments and the result are copied with structured clone. An `ArrayBuffer` or typed array returned as the result
   is moved, not copied. To move arguments instead of copying them, list them in `transfer`:
 
   ```js
   const pixels = ctx.getImageData(0, 0, w, h).data.buffer;
-  const out = await AntiGem.thread.run((buf) => { const p = new Uint8ClampedArray(buf); for (let i = 0; i < p.length; i += 4) p[i] = 255 - p[i]; return buf; },
+  const out = await ShadowCodez.thread.run((buf) => { const p = new Uint8ClampedArray(buf); for (let i = 0; i < p.length; i += 4) p[i] = 255 - p[i]; return buf; },
     [pixels], { transfer: [pixels] });
   ```
 
@@ -86,16 +86,16 @@ self.onmessage = async (e) => {
 
 | Available | Not available |
 |---|---|
-| `fetch`, `XMLHttpRequest`, `WebSocket`, `EventSource` (native, same permissions as the page) | `localStorage`, `sessionStorage`, `AntiGem.storage` |
-| `indexedDB` (the same databases as the page) | `AntiGem.ui` dialogs, `viewMedia`, `statusBar` |
-| `AntiGem.fs`: `read`, `readJSON`, `write`, `writeJSON`, `list`, `stat`, `exists`, `mkdir`, `delete`, `move`, `url(path, {thumb?})`, `folders` | `AntiGem.fs.pick`, `pickFolder`, `forgetFolder` |
-| `AntiGem.notify`: `show`, `dismiss`, `schedule`, `list`, `cancel`, `cancelAll` | `AntiGem.notify.channel`, `deleteChannel`, `active` |
-| `AntiGem.cookies`: `list`, `set`, `delete` | `AntiGem.cookies.get`, `import`, `clear` |
-| `AntiGem.mcp.list`, `AntiGem.mcp.call` | `AntiGem.on` / `off` (no events), `AntiGem.onBack`, `AntiGem.nav`, `AntiGem.intent`, `AntiGem.background` |
-| `AntiGem.permissions.all`, `query` | `AntiGem.permissions.request` |
-| `AntiGem.ui.toast`, `AntiGem.device.haptic`, `copy`, `info` | `AntiGem.device.share`, `paste`, `openUrl`, `status` |
-| `AntiGem.thread` | `AntiGem.dev`, `AntiGem.theme`, `AntiGem.page` |
-| `AntiGem.app`, `AntiGem.sdk`, `AntiGem.worker` (`true`) | |
+| `fetch`, `XMLHttpRequest`, `WebSocket`, `EventSource` (native, same permissions as the page) | `localStorage`, `sessionStorage`, `ShadowCodez.storage` |
+| `indexedDB` (the same databases as the page) | `ShadowCodez.ui` dialogs, `viewMedia`, `statusBar` |
+| `ShadowCodez.fs`: `read`, `readJSON`, `write`, `writeJSON`, `list`, `stat`, `exists`, `mkdir`, `delete`, `move`, `url(path, {thumb?})`, `folders` | `ShadowCodez.fs.pick`, `pickFolder`, `forgetFolder` |
+| `ShadowCodez.notify`: `show`, `dismiss`, `schedule`, `list`, `cancel`, `cancelAll` | `ShadowCodez.notify.channel`, `deleteChannel`, `active` |
+| `ShadowCodez.cookies`: `list`, `set`, `delete` | `ShadowCodez.cookies.get`, `import`, `clear` |
+| `ShadowCodez.mcp.list`, `ShadowCodez.mcp.call` | `ShadowCodez.on` / `off` (no events), `ShadowCodez.onBack`, `ShadowCodez.nav`, `ShadowCodez.intent`, `ShadowCodez.background` |
+| `ShadowCodez.permissions.all`, `query` | `ShadowCodez.permissions.request` |
+| `ShadowCodez.ui.toast`, `ShadowCodez.device.haptic`, `copy`, `info` | `ShadowCodez.device.share`, `paste`, `openUrl`, `status` |
+| `ShadowCodez.thread` | `ShadowCodez.dev`, `ShadowCodez.theme`, `ShadowCodez.page` |
+| `ShadowCodez.app`, `ShadowCodez.sdk`, `ShadowCodez.worker` (`true`) | |
 
 Inside workers, `Date` values are converted to epoch milliseconds as in pages: in `notify.show` and `notify.schedule`
 (`at`, `until`, `repeat.until`, `countdown`, `chronometer`, message times) and in cookie `expires`.

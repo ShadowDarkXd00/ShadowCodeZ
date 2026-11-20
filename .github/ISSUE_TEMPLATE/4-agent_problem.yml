@@ -6,8 +6,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        Many agent problems come from the provider, not from AntiGem (an expired key, no quota, a model the provider removed, a region block).
-        Please check that your account / key works **outside AntiGem** first, and tell us below.
+        Many agent problems come from the provider, not from ShadowCodez (an expired key, no quota, a model the provider removed, a region block).
+        Please check that your account / key works **outside ShadowCodez** first, and tell us below.
 
   - type: checkboxes
     id: checks
@@ -82,19 +82,19 @@ body:
       options:
         - On this phone (default)
         - Server mode (SSH tunnel or domain)
-        - Connected to a PC (AntiGem for VS Code)
+        - Connected to a PC (ShadowCodez for VS Code)
     validations:
       required: true
 
   - type: dropdown
     id: works_elsewhere
     attributes:
-      label: Does the same account / key / model work outside AntiGem?
+      label: Does the same account / key / model work outside ShadowCodez?
       description: For example the same CLI on a PC, the provider's website, or a curl request.
       options:
-        - Yes, it works on PC / elsewhere, only AntiGem fails
+        - Yes, it works on PC / elsewhere, only ShadowCodez fails
         - No, it fails there too
-        - I haven't tested it outside AntiGem
+        - I haven't tested it outside ShadowCodez
     validations:
       required: true
 

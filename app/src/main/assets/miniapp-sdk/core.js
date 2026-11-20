@@ -1,5 +1,5 @@
 /*
- * AntiGem Mini Apps SDK: core. Injected first in <head> of every page, before any app script.
+ * ShadowCodez Mini Apps SDK: core. Injected first in <head> of every page, before any app script.
  * The WebView only renders: storage, network, files, dialogs and devices are native, reached through
  * one origin-locked message channel. window.__AG is the internal API used by net.js and idb.js.
  */
@@ -20,7 +20,7 @@
     var s = JSON.stringify(obj);
     if (nativeObj) nativeObj.postMessage(s);
     else if (legacyObj) legacyObj.postMessage(s);
-    else console.warn('[AntiGem] native bridge missing (not running inside AntiGem?)');
+    else console.warn('[ShadowCodez] native bridge missing (not running inside ShadowCodez?)');
   }
 
   function makeError(e) {
@@ -103,7 +103,7 @@
 
   function define(obj, name, value) {
     try { Object.defineProperty(obj, name, { value: value, configurable: true, enumerable: true, writable: true }); }
-    catch (e) { try { obj[name] = value; } catch (x) { console.warn('[AntiGem] could not install ' + name, e); } }
+    catch (e) { try { obj[name] = value; } catch (x) { console.warn('[ShadowCodez] could not install ' + name, e); } }
   }
 
   var backHandlers = [];
@@ -140,7 +140,7 @@
     css += '--ag-app-color:' + (theme.appColor || colors.primary || '#6750a4') + ';color-scheme:' + (theme.dark ? 'dark' : 'light') + '}';
     themeStyle.textContent = css;
     document.documentElement.setAttribute('data-theme', theme.dark ? 'dark' : 'light');
-    if (window.AntiGem) window.AntiGem.theme = theme;
+    if (window.ShadowCodez) window.ShadowCodez.theme = theme;
   }
   applyTheme(BOOT.theme);
   on('theme', function (t) { applyTheme(t); });
@@ -269,7 +269,7 @@
     /** URL for <img>/<video>/fetch. {thumb: px}: a native JPEG thumbnail (photos and video frames). HEIC/HEIF become JPEG. */
     url: function (path, o) { return location.origin + '/_antigem/fs?p=' + encodeURIComponent(path) + (o && o.thumb ? '&thumb=' + Math.round(o.thumb) : ''); },
     pick: function (o) { return call('fs.pick', { accept: (o && o.accept) || '*/*', multiple: !!(o && o.multiple) }); },
-    /** The user picks a folder in AntiGem's file explorer; the app gets the manifest's "pick" access to it. → {path, access} | null */
+    /** The user picks a folder in ShadowCodez's file explorer; the app gets the manifest's "pick" access to it. → {path, access} | null */
     pickFolder: function () { return call('fs.pickFolder'); },
     /** Folders this app may use: [{path, access: "read"|"write"|"readwrite", source: "own"|"shared"|"manifest"|"picked"}] */
     folders: function () { return call('fs.folders'); },
@@ -432,7 +432,7 @@
     send: function (o) { return call('intent.send', o || {}); }
   };
   on('intent', function (d) { intentApi.current = d; });
-  var AntiGem = {
+  var ShadowCodez = {
     sdk: BOOT.sdk || 1,
     app: Object.freeze(Object.assign({}, BOOT.app)),
     page: Object.freeze({ id: (BOOT.page || {}).id, path: (BOOT.page || {}).path, params: Object.freeze(Object.assign({}, (BOOT.page || {}).params)), root: !!(BOOT.page || {}).root, background: !!(BOOT.page || {}).background }),
@@ -464,7 +464,9 @@
     },
     reload: function () { send('app.reload'); }
   };
-  Object.defineProperty(window, 'AntiGem', { value: AntiGem, configurable: false, enumerable: true, writable: false });
+  Object.defineProperty(window, 'ShadowCodez', { value: ShadowCodez, configurable: false, enumerable: true, writable: false });
+  // Keep previously published mini apps working while new apps use the branded SDK name.
+  Object.defineProperty(window, 'AntiGem', { value: ShadowCodez, configurable: false, enumerable: false, writable: false });
 
   // ------------------------------------------------------------------ running a background task
   // This page is the invisible one of a background task: once the background script has run, call its handler.
@@ -475,7 +477,7 @@
         send('bg.done', { runId: t.runId, ok: ok, error: err ? String((err && err.stack) || (err && err.message) || err) : '' });
       };
       var h = bgHandlers[t.name] || bgHandlers['*'];
-      if (typeof h !== 'function') { finish(false, 'No handler: call AntiGem.background.on("' + t.name + '", fn) in the background script'); return; }
+      if (typeof h !== 'function') { finish(false, 'No handler: call ShadowCodez.background.on("' + t.name + '", fn) in the background script'); return; }
       Promise.resolve().then(function () { return h({ name: t.name, reason: t.reason, runId: t.runId, data: t.data || null }); })
         .then(function () { finish(true); }, function (e) { console.error(e); finish(false, e); });
     });
