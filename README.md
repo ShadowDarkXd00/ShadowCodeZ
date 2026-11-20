@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="docs/readme/icon.svg" alt="AntiGem app icon" width="112">
+<img src="docs/readme/shadowcodez-logo.jpg" alt="ShadowCodeZ logo" width="320">
 
-# AntiGem
+# ShadowCodeZ
 
-*A gem that defies gravity. A full coding environment, light enough to carry in your pocket.*
+*A full coding environment, light enough to carry in your pocket.*
 
 **An AI coding workspace for Android: Antigravity, Claude Code, OpenCode and Codex agents, a real Linux terminal, a code editor and a browser the agent can control, all in one app.**
 

@@ -321,21 +321,21 @@ object BuiltInThemes {
     /** The original AntiGem look, exactly as before themes existed (other Material slots stay at Material's defaults). */
     private fun antigem(dark: Boolean) = AppTheme(
         id = if (dark) ANTIGEM_DARK else LIGHT_DEFAULT,
-        name = if (dark) "Amber Night" else "Porcelain",
+        name = if (dark) "Shadow Night" else "Shadow Light",
         dark = dark, builtIn = true,
         about = if (dark) "AntiGem's original warm dark look with the amber accent" else "AntiGem's original clean light look with the amber accent",
         colors = buildMap {
-            put("primary", 0xFFD97706); put("secondary", 0xFFB45309); put("on_primary", 0xFFFFFFFF)
+            put("primary", 0xFFB52BFF); put("secondary", 0xFF8B20D4); put("on_primary", 0xFFFFFFFF)
             if (dark) {
-                put("background", 0xFF181816); put("surface", 0xFF181816); put("on_background", 0xFFF5F5F4); put("on_surface", 0xFFF5F5F4)
-                put("surface_variant", 0xFF32312D)
-                put("card", 0xFF232320); put("text_secondary", 0xFFA8A29E); put("user_bubble", 0xFF32312D); put("thinking_bg", 0xFF282724)
+                put("background", 0xFF08070A); put("surface", 0xFF0D0B11); put("on_background", 0xFFF5F1FA); put("on_surface", 0xFFF5F1FA)
+                put("surface_variant", 0xFF241B2D)
+                put("card", 0xFF121018); put("text_secondary", 0xFFAAA1B5); put("user_bubble", 0xFF241B2D); put("thinking_bg", 0xFF15111B)
             } else {
-                put("background", 0xFFF9F9FB); put("surface", 0xFFF9F9FB); put("on_background", 0xFF1C1917); put("on_surface", 0xFF1C1917)
+                put("background", 0xFFFBF8FF); put("surface", 0xFFFBF8FF); put("on_background", 0xFF21152A); put("on_surface", 0xFF21152A)
                 put("surface_variant", 0xFFE8EAED)
                 put("card", 0xFFFFFFFF); put("text_secondary", 0xFF78716C); put("user_bubble", 0xFFE8EAED); put("thinking_bg", 0xFFF1F3F5)
             }
-            put("code_bg", 0xFF1E1E1C); put("code_text", 0xFFF5F5F4)
+            put("code_bg", 0xFF100D14); put("code_text", 0xFFF5F1FA)
             put("success", 0xFF16A34A); put("warning", 0xFFD97706); put("danger", 0xFFDC2626); put("info", 0xFF3B82F6); put("accent_alt", 0xFF8B5CF6)
             syntaxKeys.zip(oneDarkSyntax).forEach { (k, v) -> put(k, v) }
             put("syntax_control", 0xFFC678DD); put("syntax_tag", 0xFFE06C75); put("syntax_attribute", 0xFFD19A66)
@@ -360,29 +360,29 @@ object BuiltInThemes {
 
     /** The default dark theme: every color set by hand (first made as a custom theme in the app, then exported). */
     private fun midnightAurora() = AppTheme(
-        id = DARK_DEFAULT, name = "Midnight Aurora", dark = true, builtIn = true,
+        id = DARK_DEFAULT, name = "ShadowCodeZ", dark = true, builtIn = true,
         about = "Deep ink-blue midnight with luminous violet, aurora teal and rose accents",
         colors = linkedMapOf(
-            "primary" to 0xFFA78BFA, "on_primary" to 0xFF14102B, "primary_container" to 0xFF373256, "on_primary_container" to 0xFFC4B5FE,
-            "secondary" to 0xFF7C6AE6, "on_secondary" to 0xFF111111, "secondary_container" to 0xFF2C2A52, "on_secondary_container" to 0xFFA6A0F2,
+            "primary" to 0xFFC026FF, "on_primary" to 0xFF170820, "primary_container" to 0xFF472064, "on_primary_container" to 0xFFF0C2FF,
+            "secondary" to 0xFF8B20D4, "on_secondary" to 0xFFFFFFFF, "secondary_container" to 0xFF321A48, "on_secondary_container" to 0xFFE8B8FF,
             "tertiary" to 0xFF5EEAD4, "on_tertiary" to 0xFF111111, "tertiary_container" to 0xFF28494D, "on_tertiary_container" to 0xFFA2F2E3,
-            "background" to 0xFF0A0B14, "on_background" to 0xFFE8EAF6, "surface" to 0xFF0F111C, "on_surface" to 0xFFE8EAF6,
-            "surface_variant" to 0xFF1C2033, "on_surface_variant" to 0xFF9AA1BF, "surface_container_lowest" to 0xFF030408,
-            "surface_container_low" to 0xFF0F111D, "surface_container" to 0xFF151826, "surface_container_high" to 0xFF1F2231,
-            "surface_container_highest" to 0xFF262938, "outline" to 0xFF3A4066, "outline_variant" to 0xFF23283F, "error" to 0xFFFB7185,
+            "background" to 0xFF060508, "on_background" to 0xFFF4EFF8, "surface" to 0xFF0B0910, "on_surface" to 0xFFF4EFF8,
+            "surface_variant" to 0xFF21182A, "on_surface_variant" to 0xFFA99EB5, "surface_container_lowest" to 0xFF030205,
+            "surface_container_low" to 0xFF0B0910, "surface_container" to 0xFF110E17, "surface_container_high" to 0xFF191421,
+            "surface_container_highest" to 0xFF241B2D, "outline" to 0xFF58306D, "outline_variant" to 0xFF30223A, "error" to 0xFFFB7185,
             "on_error" to 0xFF111111, "error_container" to 0xFF492B38, "on_error_container" to 0xFFFF9EA9, "inverse_surface" to 0xFFE8EAF6,
-            "inverse_on_surface" to 0xFF0A0B14, "inverse_primary" to 0xFFA78BFA, "card" to 0xFF151826, "text_secondary" to 0xFF9AA1BF,
-            "user_bubble" to 0xFF252A47, "thinking_bg" to 0xFF12152A, "code_bg" to 0xFF0C0E19, "code_text" to 0xFFD6DBF5, "success" to 0xFF4ADE80,
-            "warning" to 0xFFFBBF24, "danger" to 0xFFFB7185, "info" to 0xFF60A5FA, "accent_alt" to 0xFFC084FC, "syntax_keyword" to 0xFFC4A7FF,
+            "inverse_on_surface" to 0xFF060508, "inverse_primary" to 0xFFC026FF, "card" to 0xFF110E17, "text_secondary" to 0xFFA99EB5,
+            "user_bubble" to 0xFF281B35, "thinking_bg" to 0xFF120D19, "code_bg" to 0xFF08060B, "code_text" to 0xFFE8DFF0, "success" to 0xFF4ADE80,
+            "warning" to 0xFFFBBF24, "danger" to 0xFFFB7185, "info" to 0xFF60A5FA, "accent_alt" to 0xFFDA78FF, "syntax_keyword" to 0xFFD6A2FF,
             "syntax_type" to 0xFF5EEAD4, "syntax_string" to 0xFF9AE6B4, "syntax_number" to 0xFFFFB86B, "syntax_comment" to 0xFF5B6285,
             "syntax_function" to 0xFF7DB5FF, "syntax_annotation" to 0xFFF4A9D8, "syntax_punctuation" to 0xFF8991B3, "syntax_control" to 0xFFC4A7FF,
             "syntax_tag" to 0xFF7DB5FF, "syntax_attribute" to 0xFF5EEAD4, "border" to 0xFF2D313F, "fill" to 0xFF212432,
             "success_container" to 0xFF1C302E, "warning_container" to 0xFF322D27, "danger_container" to 0xFF34222E, "info_container" to 0xFF1D283E,
-            "accent_indigo" to 0xFF818CF8, "accent_teal" to 0xFF2DD4BF, "accent_pink" to 0xFFF472B6, "editor_bg" to 0xFF0C0E19,
-            "editor_panel" to 0xFF141622, "editor_text" to 0xFFD6DBF5, "editor_muted" to 0xFF676B7E, "editor_border" to 0xFF252735,
+            "accent_indigo" to 0xFFB44DFF, "accent_teal" to 0xFF2DD4BF, "accent_pink" to 0xFFF472B6, "editor_bg" to 0xFF08060B,
+            "editor_panel" to 0xFF110E17, "editor_text" to 0xFFE8DFF0, "editor_muted" to 0xFF80758D, "editor_border" to 0xFF30223A,
             "editor_selection" to 0xFF373258, "editor_line" to 0xFF191B27, "editor_added_bg" to 0xFF1C3530, "editor_added_text" to 0xFF9CDEBD,
             "editor_removed_bg" to 0xFF39232F, "editor_removed_text" to 0xFFEFAABD, "editor_info_bg" to 0xFF1A253B, "editor_info_text" to 0xFF86B6FA,
-            "terminal_bg" to 0xFF0C0E19, "terminal_fg" to 0xFFD6DBF5, "terminal_cursor" to 0xFFA78BFA, "ansi_0" to 0xFF2A2D3A,
+            "terminal_bg" to 0xFF08060B, "terminal_fg" to 0xFFE8DFF0, "terminal_cursor" to 0xFFC026FF, "ansi_0" to 0xFF2A2032,
             "ansi_1" to 0xFFFB7185, "ansi_2" to 0xFF4ADE80, "ansi_3" to 0xFFFBBF24, "ansi_4" to 0xFF60A5FA, "ansi_5" to 0xFFC084FC,
             "ansi_6" to 0xFF2DD4BF, "ansi_7" to 0xFFB3B8D0, "ansi_8" to 0xFF5D6173, "ansi_9" to 0xFFFF97A3, "ansi_10" to 0xFF85E7A1,
             "ansi_11" to 0xFFFDD072, "ansi_12" to 0xFF89BCFD, "ansi_13" to 0xFFCFA4FF, "ansi_14" to 0xFF79DFCF, "ansi_15" to 0xFFD6DBF5
