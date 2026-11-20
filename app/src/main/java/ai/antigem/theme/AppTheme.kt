@@ -360,7 +360,7 @@ object BuiltInThemes {
 
     /** The default dark theme: every color set by hand (first made as a custom theme in the app, then exported). */
     private fun midnightAurora() = AppTheme(
-        id = DARK_DEFAULT, name = "ShadowCodeZ", dark = true, builtIn = true,
+        id = DARK_DEFAULT, name = "ShadowCodez", dark = true, builtIn = true,
         about = "Deep ink-blue midnight with luminous violet, aurora teal and rose accents",
         colors = linkedMapOf(
             "primary" to 0xFFC026FF, "on_primary" to 0xFF170820, "primary_container" to 0xFF472064, "on_primary_container" to 0xFFF0C2FF,

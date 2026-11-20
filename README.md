@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="docs/readme/shadowcodez-logo.jpg" alt="ShadowCodeZ logo" width="320">
+<img src="docs/readme/shadowcodez-logo.jpg" alt="ShadowCodez logo" width="320">
 
-# ShadowCodeZ
+# ShadowCodez
 
 *A full coding environment, light enough to carry in your pocket.*
 

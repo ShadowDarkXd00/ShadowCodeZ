@@ -1,4 +1,4 @@
-name: Build ShadowCodeZ debug APK
+name: Build ShadowCodez debug APK
 
 on:
   push:
@@ -49,7 +49,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: ShadowCodeZ-debug-apk
+          name: ShadowCodez-debug-apk
           path: output/*-debug.apk
           if-no-files-found: error
           retention-days: 14
